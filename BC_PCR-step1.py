@@ -1,24 +1,72 @@
 from opentrons import labware, instruments, robot
 
-# single p300, single p10
-# tip rack for both pipettes
-# 3x tube rack 2ml
-# 1x 15/50 rack
-# 2x 96 pcr plate
 
 tiprack_200ul = labware.load('tiprack-200ul', '10')
 tiprack_10ul = labware.load('tiprack-10ul', '11')
 
+"""
+DNA Tuberack in location 4.
+Contains genomic DNA in 2ml tubes. 
+Order used:
 
+01   05   09   13   17   21
+02   06   10   14   18   22
+03   07   11   15   19   23
+04   08   12   16   20   24
+
+"""
 tuberack_DNA = labware.load('tube-rack-2ml', '4')
+
+
+"""
+Primer Tuberack in location 6.
+Contains 2ml tubes with Step 1 Forward Primers. Order of use:
+01   05   09
+02   06   10
+03   07   11
+04   08   12
+
+For default with all primers used:
+
+F201   F205   F209   x   x   x
+F202   F206   F210   x   x   x
+F203   F207   F211   x   x   x
+F204   F208   F212   x   x   x
+
+"""
 tuberack_primers = labware.load('tube-rack-2ml', '6')
+
+
+"""
+Mix Tuberack in location 5.
+Empty tubes. MasterMix per sample is created in this tubes
+"""
 tuberack_mix = labware.load('tube-rack-2ml', '5')
 
-# 15 ml tubes hold mastermix
-# A1 and A2 have mastermix pre-made 
+
+"""
+MasterMix in 50ml tubes in location 4.
+MM for first reverse primer in A3.
+MM for second reverse primer in A4.
+Contains HotStartTaq, MgCl2, Water, Reverse Primer
+"""
 mm_tuberack = labware.load('tube-rack-15_50ml', '7')
 
-# output plates
+
+"""
+Output plates. 
+Ends up with 8 reactions per sample arrayed as:
+
+01a   02a   ...   12a
+01b   02b   ...   12b
+01c   02c   ...   12c
+01d   02d   ...   12d
+01e   02e   ...   12e 
+01f   02f   ...   12f
+01g   02g   ...   12g
+01h   02h   ...   12h
+
+"""
 output_plate_1 = labware.load('96-PCR-tall', '1')
 output_plate_2 = labware.load('96-PCR-tall', '2')
 
@@ -33,7 +81,6 @@ s10 = instruments.P10_Single(
 )
 
 # distribute 320ul mastermix to first 12 mix tubes
-
 
 s300.distribute(160, mm_tuberack['A3'], tuberack_mix.wells(0, to=11))
 s300.distribute(160, mm_tuberack['A3'], tuberack_mix.wells(0, to=11))

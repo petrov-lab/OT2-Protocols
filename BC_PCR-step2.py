@@ -4,11 +4,12 @@ tiprack_200ul = labware.load('tiprack-200ul', '10')
 tiprack_10ul = labware.load('tiprack-10ul', '11')
 
 """
+Primer Tuberack in location 6.
 Contains 2ml tubes with 'N' Nextera Primers. Order of use:
-01   05   09
-02   06   10
-03   07   11
-04   08   12
+01   05   09   x   x   x
+02   06   10   x   x   x
+03   07   11   x   x   x
+04   08   12   x   x   x
 
 For Set D default with all primers used:
 
@@ -18,10 +19,11 @@ N719   N723   N728   x   x   x
 N720   N724   N729   x   x   x
 
 """
-
 tuberack_primers = labware.load('tube-rack-2ml', '6')
 
+
 """
+DNA Tuberack in location 5.
 Contains cleaned-up Step 1 PCR product in 2ml tubes. 
 Order used:
 
@@ -31,18 +33,21 @@ Order used:
 04   08   12   16   20   24
 
 """
-
 tuberack_DNA = labware.load('tube-rack-2ml', '5')
 
+
 """
-MasterMix in 50ml tubes (A3 and A4).
+MasterMix in 2ml tubes in location 4.
+MM for first S primer in A1 (row 1, col 1).
+MM for second S primer in B1 (row 2, col 1).
 Contains Q5 Polymerase + Q5 Buffer + dNTP + Water + S Primer
 """
-
 tuberack_MM = labware.load('tube-rack-2ml', '4')
 
+
 """
-Output plate. Ends up arrayed as:
+Output plate in location 1.
+Ends up arrayed as:
 
 01a   03a   05a   07a   09a   11a   13a   15a   17a   19a   21a   23a
 01b   03b   05b   07b   09b   11b   13b   15b   17b   19b   21b   23b
@@ -54,7 +59,6 @@ x     x     x     x     x     x     x     x     x     x     x     x
 x     x     x     x     x     x     x     x     x     x     x     x
 
 """
-
 output_plate = labware.load('96-PCR-tall', '1')
 
 
