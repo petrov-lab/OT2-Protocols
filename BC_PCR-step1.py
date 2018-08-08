@@ -106,11 +106,11 @@ for i in range(12):
     s300.aspirate(200,tuberack_DNA.wells(i))
     for j in range(4):
         s300.dispense(50,output_plate_1.wells(8*(i)+j))
-    s300.blow_out()
+    s300.blow_out(output_plate_1.wells(8*(i)+j))
     s300.aspirate(200,tuberack_DNA.wells(i))
     for j in range(4,8):
         s300.dispense(50,output_plate_1.wells(8*(i)+j))
-    s300.blow_out()
+    s300.blow_out(output_plate_1.wells(8*(i)+j))
     s300.drop_tip()
 
     # s300.distribute(50, tuberack_mix.wells(i), output_plate_1.wells((8*(i)), to=((8*i)+(7)))) old way of doing it - but dripped
@@ -122,11 +122,11 @@ for i in range(12, 24):
     s300.aspirate(200,tuberack_DNA.wells(i))
     for j in range(4):
         s300.dispense(50,output_plate_2.wells(8*(i-12)+j))
-    s300.blow_out()
+    s300.blow_out(output_plate_2.wells(8*(i-12)+j))
     s300.aspirate(200,tuberack_DNA.wells(i))
     for j in range(4,8):
         s300.dispense(50,output_plate_2.wells(8*(i-12)+j))
-    s300.blow_out()
+    s300.blow_out(output_plate_2.wells(8*(i-12)+j))
     s300.drop_tip()
 
     # s300.distribute(50, tuberack_mix.wells(i), output_plate_2.wells((8*(i-12)), to=((8*(i-12))+7))) old way of doing it - but dripped
