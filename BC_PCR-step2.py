@@ -1,6 +1,5 @@
 from opentrons import labware, instruments, robot
 
-
 tiprack_200ul = labware.load('tiprack-200ul', '10')
 tiprack_10ul = labware.load('tiprack-10ul', '11')
 
