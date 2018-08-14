@@ -103,11 +103,11 @@ for i in range(12):
 for i in range(12):
     s300.pick_up_tip()
     s300.transfer(72, tuberack_DNA.wells(i), tuberack_mix.wells(i), mix_before=(3, 50), new_tip='never', mix_after=(5, 50))
-    s300.aspirate(200,tuberack_DNA.wells(i))
+    s300.aspirate(200,tuberack_mix.wells(i))
     for j in range(4):
         s300.dispense(50,output_plate_1.wells(8*(i)+j))
     s300.blow_out(output_plate_1.wells(8*(i)+j))
-    s300.aspirate(200,tuberack_DNA.wells(i))
+    s300.aspirate(200,tuberack_mix.wells(i))
     for j in range(4,8):
         s300.dispense(50,output_plate_1.wells(8*(i)+j))
     s300.blow_out(output_plate_1.wells(8*(i)+j))
@@ -119,11 +119,11 @@ for i in range(12):
 for i in range(12, 24):
     s300.pick_up_tip()
     s300.transfer(72, tuberack_DNA.wells(i), tuberack_mix.wells(i), mix_before=(3, 50), new_tip='never', mix_after=(5, 50))
-    s300.aspirate(200,tuberack_DNA.wells(i))
+    s300.aspirate(200,tuberack_mix.wells(i))
     for j in range(4):
         s300.dispense(50,output_plate_2.wells(8*(i-12)+j))
     s300.blow_out(output_plate_2.wells(8*(i-12)+j))
-    s300.aspirate(200,tuberack_DNA.wells(i))
+    s300.aspirate(200,tuberack_mix.wells(i))
     for j in range(4,8):
         s300.dispense(50,output_plate_2.wells(8*(i-12)+j))
     s300.blow_out(output_plate_2.wells(8*(i-12)+j))
