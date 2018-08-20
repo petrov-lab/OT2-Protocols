@@ -1,0 +1,43 @@
+from opentrons import labware, instruments, robot
+
+
+# labware & instrument setup
+tiprack_200ul = labware.load('tiprack-200ul', '10')
+tiprack_10ul = labware.load('tiprack-10ul', '11')
+
+# Qubit mix is placed in a 50mL conical in A3
+tuberack_buffer = labware.load('tube-rack-15_50ml', '7')
+
+# For now, qubit tubes are placed into deepwelll 96 well plates, in odd columns only
+plate_tubes_A = labware.load('96-PCR-tall', '4')
+plate_tubes_B = labware.load('96-PCR-tall', '5')
+
+# These are precious. So keep them where they won't get dripped on
+tuberack_DNA_1 = labware.load('tube-rack-2ml', '1')
+tuberack_DNA_2 = labware.load('tube-rack-2ml', '2')
+tuberack_DNA_3 = labware.load('tube-rack-2ml', '3')
+
+
+s300 = instruments.P300_Single(
+                               tip_racks=[tiprack_200ul],
+                               mount="right"
+                               )
+
+s10 = instruments.P10_Single(
+                             tip_racks=[tiprack_10ul],
+                             mount="left"
+                             )
+
+
+# distribute 198ul qubit buffer to 96 tubes
+# Do this first, otherwise the 2uL does not actually get into the tube
+# It gets a little drippy, but I dont care so much at this stage.
+s300.distribute(198, tuberack_buffer['A3'], plate_tubes_A.cols(0,2,4,6,8,10))
+s300.distribute(198, tuberack_buffer['A3'], plate_tubes_B.cols(0,2,4))
+
+# add 2ul library to each tube
+# Do this second, I tried to do it first with a blow out, but on the p10, the blow out command seems to cause the pipette to fall right off!
+s10.transfer(2, tuberack_DNA_1(), plate_tubes_A.cols(0,2,4), mix_before=(3, 5), new_tip='always')
+s10.transfer(2, tuberack_DNA_2(), plate_tubes_A.cols(6,8,10), mix_before=(3, 5), new_tip='always')
+s10.transfer(2, tuberack_DNA_3(), plate_tubes_B.cols(0,2,4), mix_before=(3, 5), new_tip='always')
+
