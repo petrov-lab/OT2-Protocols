@@ -1,0 +1,37 @@
+
+from opentrons import labware, instruments, robot
+
+# what we need:
+# 96 deep well (each well holds a qubit tube)
+# 96 PCR flat (has library)
+# 50ml falcon tube (holds qubit buffer)
+# tube rack for 50ml falcon tube
+# single p300, single p10
+# tip racks for both pipettes
+
+# labware & instrument setup
+tiprack_200ul = labware.load('tiprack-200ul', '10')
+tiprack_10ul = labware.load('tiprack-10ul', '11')
+
+tuberack_buffer = labware.load('tube-rack-15_50ml', '7')
+plate_tubes = labware.load('96-PCR-tall', '1')
+plate_library = labware.load('96-PCR-flat', '2')
+
+s300 = instruments.P300_Single(
+    tip_racks=[tiprack_200ul],
+    mount="right"
+)
+
+s10 = instruments.P10_Single(
+    tip_racks=[tiprack_10ul],
+    mount="left"
+)
+
+# distribute 198ul qubit buffer to 96 tubes
+# This was kinda drippy
+s300.distribute(198, tuberack_buffer['A3'], plate_tubes.cols(0,2,4,6,8,10))
+
+# add 2ul library to each tube
+# This would be awesome with a multichannel
+s10.transfer(2, plate_library.wells(0, to=47), plate_tubes.cols(0,2,4,6,8,10), new_tip='always')
+
